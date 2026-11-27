@@ -1,0 +1,170 @@
+[gd_resource type="MeshLibrary" format=4]
+
+[ext_resource type="Material" path="res://assets/terrain/materials/grass.tres" id="1_8i6c8"]
+[ext_resource type="Material" path="res://assets/terrain/materials/dirt.tres" id="2_pkqbb"]
+[ext_resource type="Material" path="res://assets/terrain/materials/rock.tres" id="3_qi0ng"]
+[ext_resource type="Material" path="res://assets/terrain/materials/sand.tres" id="4_n65wf"]
+[ext_resource type="Material" path="res://assets/terrain/materials/water.tres" id="5_e0fl1"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nxyom"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAIA/AAAAAAAAgD8AAIA/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAA"),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"material": ExtResource("1_8i6c8"),
+"name": "Grass",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AACAvwAAAAAAAIA/AACAPwAAAAAAAIC/AACAPwAAAAAAAIA/AACAvwAAAAAAAIA/AACAvwAAAAAAAIC/AACAPwAAAAAAAIC//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_us3j2"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0t2x8"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAIA/AAAAAAAAgD8AAIA/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAA"),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"material": ExtResource("2_pkqbb"),
+"name": "Dirt",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AACAvwAAAAAAAIA/AACAPwAAAAAAAIC/AACAPwAAAAAAAIA/AACAvwAAAAAAAIA/AACAvwAAAAAAAIC/AACAPwAAAAAAAIC//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_g2kcb"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8y6fm"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 1, 2),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAIA/AAAAAAAAgD8AAIA/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAA"),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"material": ExtResource("1_8i6c8"),
+"name": "Grass",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AACAvwAAAAAAAIA/AACAPwAAgD8AAIC/AACAPwAAAAAAAIA/AACAvwAAAAAAAIA/AACAvwAAgD8AAIC/AACAPwAAgD8AAIC//39U1f///7//f1TV////v/9/VNX///+//39U1f///7//f1TV////v/9/VNX///+/")
+}, {
+"aabb": AABB(-1, 0, -1, 2, 1, 2),
+"attribute_data": PackedByteArray("AACAPwAAAD8AAAAAAAAAAAAAAAAAAAA/AACAPwAAAAAAAIA/AAAAPwAAAAAAAAAAAAAAAAAAAD8AAAAAAAAAPwAAAAAAAAAAAACAPwAAAD8="),
+"format": 34359742487,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABwAIAAkA"),
+"material": ExtResource("3_qi0ng"),
+"name": "Rock",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("AACAPwAAAAAAAIC/AACAvwAAgD8AAIC/AACAvwAAAAAAAIC/AACAPwAAgD8AAIC/AACAPwAAAAAAAIA/AACAPwAAgD8AAIC/AACAPwAAAAAAAIC/AACAvwAAAAAAAIC/AACAvwAAgD8AAIC/AACAvwAAAAAAAIA//////////z//////////P/////////8//////////z////9//3//P////3//f/8/////f/9//z8AAP9//3//vwAA/3//f/+/AAD/f/9//78=")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_qap1d"]
+data = PackedVector3Array(-1, 0, 1, 1, 1, -1, 1, 0, 1, -1, 0, 1, -1, 1, -1, 1, 1, -1, 1, 0, -1, -1, 1, -1, -1, 0, -1, 1, 0, -1, 1, 1, -1, -1, 1, -1, 1, 0, 1, 1, 1, -1, 1, 0, -1, -1, 0, -1, -1, 1, -1, -1, 0, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xte0m"]
+_surfaces = [{
+"aabb": AABB(-1, 1, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAIA/AAAAAAAAgD8AAIA/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAA"),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"material": ExtResource("1_8i6c8"),
+"name": "Grass",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AACAvwAAgD8AAIA/AACAPwAAgD8AAIC/AACAPwAAgD8AAIA/AACAvwAAgD8AAIA/AACAvwAAgD8AAIC/AACAPwAAgD8AAIC//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/")
+}, {
+"aabb": AABB(-1, 0, -1, 2, 1, 2),
+"attribute_data": PackedByteArray("AAAAAAAAAD8AAIA/AAAAAAAAgD8AAAA/AAAAAAAAAAAAAIA/AAAAPwAAAAAAAAAAAAAAAAAAAD8AAIA/AAAAAAAAgD8AAAA/AAAAAAAAAAAAAAAAAAAAPwAAgD8AAAA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAAA/AACAPwAAAAAAAIA/AAAAPwAAAAAAAAAA"),
+"format": 34359742487,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACwAMAA0ADgAPABAADgARAA8A"),
+"material": ExtResource("3_qi0ng"),
+"name": "Rock",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("AACAvwAAAAAAAIA/AACAPwAAgD8AAIA/AACAPwAAAAAAAIA/AACAvwAAgD8AAIA/AACAPwAAAAAAAIC/AACAvwAAgD8AAIC/AACAvwAAAAAAAIC/AACAPwAAgD8AAIC/AACAPwAAAAAAAIA/AACAPwAAgD8AAIC/AACAPwAAAAAAAIC/AACAPwAAAAAAAIA/AACAPwAAgD8AAIA/AACAPwAAgD8AAIC/AACAvwAAAAAAAIC/AACAvwAAgD8AAIA/AACAvwAAAAAAAIA/AACAvwAAgD8AAIC//3//f////7//f/9/////v/9//3////+//3//f////7//////////P/////////8//////////z//////////P////3//f/8/////f/9//z////9//3//P////3//f/8/////f/9//z////9//3//PwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_khywl"]
+data = PackedVector3Array(-1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, 0, 1, 1, 1, 1, 1, 0, 1, -1, 0, 1, -1, 1, 1, 1, 1, 1, 1, 0, -1, -1, 1, -1, -1, 0, -1, 1, 0, -1, 1, 1, -1, -1, 1, -1, 1, 0, 1, 1, 1, -1, 1, 0, -1, 1, 0, 1, 1, 1, 1, 1, 1, -1, -1, 0, -1, -1, 1, 1, -1, 0, 1, -1, 0, -1, -1, 1, -1, -1, 1, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_osvsa"]
+_surfaces = [{
+"aabb": AABB(-1, -0.5, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAIA/AAAAAAAAgD8AAIA/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAA"),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"material": ExtResource("4_n65wf"),
+"name": "Sand",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AACAvwAAAL8AAIA/AACAPwAAAL8AAIC/AACAPwAAAL8AAIA/AACAvwAAAL8AAIA/AACAvwAAAL8AAIC/AACAPwAAAL8AAIC//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/")
+}, {
+"aabb": AABB(-1, -0.15, -1, 2, 1e-05, 2),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAIA/AAAAAAAAgD8AAIA/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAA"),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"material": ExtResource("5_e0fl1"),
+"name": "Water",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AACAv5qZGb4AAIA/AACAP5qZGb4AAIC/AACAP5qZGb4AAIA/AACAv5qZGb4AAIA/AACAv5qZGb4AAIC/AACAP5qZGb4AAIC//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rhqxi"]
+data = PackedVector3Array(-1, -0.5, 1, 1, -0.5, -1, 1, -0.5, 1, -1, -0.5, 1, -1, -0.5, -1, 1, -0.5, -1, -1, -0.14999999, 1, 1, -0.14999999, -1, 1, -0.14999999, 1, -1, -0.14999999, 1, -1, -0.14999999, -1, 1, -0.14999999, -1)
+
+[resource]
+item/0/name = "Grass (flat)"
+item/0/mesh = SubResource("ArrayMesh_nxyom")
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/mesh_cast_shadow = 1
+item/0/shapes = [SubResource("ConcavePolygonShape3D_us3j2"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
+item/1/name = "Dirt path (flat)"
+item/1/mesh = SubResource("ArrayMesh_0t2x8")
+item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/mesh_cast_shadow = 1
+item/1/shapes = [SubResource("ConcavePolygonShape3D_g2kcb"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1
+item/2/name = "Grass slope (rises to -Z)"
+item/2/mesh = SubResource("ArrayMesh_8y6fm")
+item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/mesh_cast_shadow = 1
+item/2/shapes = [SubResource("ConcavePolygonShape3D_qap1d"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/navigation_layers = 1
+item/3/name = "Cliff block"
+item/3/mesh = SubResource("ArrayMesh_xte0m")
+item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/mesh_cast_shadow = 1
+item/3/shapes = [SubResource("ConcavePolygonShape3D_khywl"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/navigation_layers = 1
+item/4/name = "Water"
+item/4/mesh = SubResource("ArrayMesh_osvsa")
+item/4/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/4/mesh_cast_shadow = 1
+item/4/shapes = [SubResource("ConcavePolygonShape3D_rhqxi"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/4/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/4/navigation_layers = 1
