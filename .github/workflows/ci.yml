@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Lint, type check and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      # The Next.js app may not be scaffolded yet. Skip the remaining steps
+      # (instead of failing) until a package.json exists.
+      - name: Detect app
+        id: detect
+        run: |
+          if [ -f package.json ]; then
+            echo "has_app=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_app=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No package.json found; skipping lint, type check and build."
+          fi
+
+      - name: Set up Node.js
+        if: steps.detect.outputs.has_app == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: ${{ hashFiles('package-lock.json') != '' && 'npm' || '' }}
+
+      - name: Install dependencies
+        if: steps.detect.outputs.has_app == 'true'
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Lint
+        if: steps.detect.outputs.has_app == 'true'
+        run: npm run lint --if-present
+
+      - name: Type check
+        if: steps.detect.outputs.has_app == 'true'
+        run: |
+          if npm run | grep -qE '^  typecheck$'; then
+            npm run typecheck
+          elif [ -f tsconfig.json ]; then
+            npx --no-install tsc --noEmit
+          else
+            echo "::notice::No tsconfig.json found; skipping type check."
+          fi
+
+      - name: Build
+        if: steps.detect.outputs.has_app == 'true'
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
