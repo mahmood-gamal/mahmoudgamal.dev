@@ -16,7 +16,39 @@ Characters are 2D sprites in the 3D world, like in Ragnarok Online. Each sprite 
 
 - `Ragna.Core.Characters.CharacterAnimator` (`scripts/core/Characters/`) has the rules. It has no Godot dependency and is tested in `tests/Ragna.Core.Tests/Characters/`.
 - `CharacterSprite` (`scripts/gameplay/Characters/`) reads the speed of the nearest `CharacterBody3D` above it every frame. It plays `walk` above **Walk Speed Threshold** (0.1 m/s) and `idle` below it.
+- It also picks one of eight directions every frame, so the sprite shows the side of the character the camera sees. See [8-direction facing](#8-direction-facing).
 - Call `PlayAttack()` on the sprite to play `attack` once, from the first frame. It plays over idle and walk, then the sprite goes back to idle or walk. Nothing calls it yet; click-to-attack combat (GAM-10) will.
+
+## 8-direction facing
+
+The character faces the way it last walked. It keeps that facing when it stops. Call `Face(direction)` on the sprite to turn it, for example towards an attack target.
+
+Every frame the sprite compares that facing with the active camera's look direction, both flattened onto the ground. The angle between them picks one of eight directions. Only the angle between them counts, so the drawn direction changes when the camera turns with **Q** / **E**, even if the character stands still.
+
+| Row | Direction | Suffix | What the camera sees |
+| --- | --- | --- | --- |
+| 0 | South | `s` | The front: the character faces the camera |
+| 1 | South-west | `sw` | Front, turned to the screen's left |
+| 2 | West | `w` | Walking to the screen's left |
+| 3 | North-west | `nw` | Back, turned to the screen's left |
+| 4 | North | `n` | The back: the character faces away |
+| 5 | North-east | `ne` | Back, turned to the screen's right |
+| 6 | East | `e` | Walking to the screen's right |
+| 7 | South-east | `se` | Front, turned to the screen's right |
+
+Each direction covers 45°, centred on it. The math is `Ragna.Core.Characters.FacingDirections` (`scripts/core/Characters/FacingDirection.cs`), tested in `tests/Ragna.Core.Tests/Characters/FacingDirectionTests.cs`.
+
+### Directional animations
+
+For each animation, the sprite looks for a directional version in its `SpriteFrames`, in this order. The example is `walk` facing south-east:
+
+1. `walk_se`, the exact direction.
+2. `walk_sw`, the mirror image, drawn flipped left to right. A sheet with only the five directions `s`, `sw`, `w`, `nw` and `n` covers all eight.
+3. `walk`, the plain animation, not flipped.
+
+When the direction changes in the middle of an animation, the sprite keeps the current frame, so a walk cycle or an attack does not restart.
+
+The placeholder art only has the plain `idle`, `walk` and `attack`, so it looks the same from every side.
 
 ## Sprite settings
 
