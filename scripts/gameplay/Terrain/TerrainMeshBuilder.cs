@@ -37,6 +37,24 @@ public static class TerrainMeshBuilder
         return mesh;
     }
 
+    /// <summary>
+    /// Collision for one tile, from <see cref="TerrainTileGeometry.Collision"/>. It is used for mouse
+    /// picking and navmesh baking, so the water surface is left out.
+    /// </summary>
+    public static ConcavePolygonShape3D BuildCollision(TerrainTile tile)
+    {
+        var faces = new List<Vector3>();
+        foreach (var tri in TerrainTileGeometry.Collision(tile))
+        {
+            // Same winding as the visible mesh in Build.
+            faces.Add(ToGodot(tri.A));
+            faces.Add(ToGodot(tri.C));
+            faces.Add(ToGodot(tri.B));
+        }
+
+        return new ConcavePolygonShape3D { Data = [.. faces] };
+    }
+
     /// <summary>GridMap orientation index for a yaw (degrees about +Y).</summary>
     public static int Orientation(GridMap gridMap, int yawDegrees) =>
         gridMap.GetOrthogonalIndexFromBasis(new Basis(Vector3.Up, Mathf.DegToRad(yawDegrees)));

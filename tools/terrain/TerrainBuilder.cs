@@ -11,7 +11,7 @@ namespace Ragna.Tools.Terrain;
 /// <list type="bullet">
 /// <item><c>textures</c>: writes placeholder PNGs (skips files that already exist, so hand-made art is kept).</item>
 /// <item><c>library</c>: writes materials (skips existing ones) and always rebuilds the MeshLibrary.</item>
-/// <item><c>map</c>: always rebuilds scenes/maps/TestMap.tscn from TestMapLayout.</item>
+/// <item><c>map</c>: always rebuilds scenes/maps/TestMap.tscn from TestMapLayout and bakes its navmesh.</item>
 /// </list>
 /// </summary>
 public partial class TerrainBuilder : Node
@@ -21,7 +21,8 @@ public partial class TerrainBuilder : Node
     public const string LibraryPath = "res://assets/terrain/terrain_tiles.tres";
     public const string TestMapPath = "res://scenes/maps/TestMap.tscn";
 
-    public override void _Ready()
+    // async void is fine here: every exception is caught below and turned into an exit code.
+    public override async void _Ready()
     {
         var steps = OS.GetCmdlineUserArgs();
         var exitCode = 0;
@@ -33,7 +34,7 @@ public partial class TerrainBuilder : Node
                 {
                     case "textures": WriteTextures(); break;
                     case "library": WriteLibrary(); break;
-                    case "map": WriteTestMap(); break;
+                    case "map": await WriteTestMap(); break;
                     default: throw new ArgumentException($"Unknown step '{step}'. Use textures, library or map.");
                 }
             }
@@ -79,8 +80,8 @@ public partial class TerrainBuilder : Node
             library.CreateItem(id);
             library.SetItemName(id, TerrainTileGeometry.DisplayName(tile));
             library.SetItemMesh(id, mesh);
-            // Collision lets mouse picking (and later navmesh baking) hit the terrain.
-            library.SetItemShapes(id, new Godot.Collections.Array { mesh.CreateTrimeshShape(), Transform3D.Identity });
+            // Collision lets mouse picking and navmesh baking hit the terrain (not the water surface).
+            library.SetItemShapes(id, new Godot.Collections.Array { TerrainMeshBuilder.BuildCollision(tile), Transform3D.Identity });
         }
 
         Check(ResourceSaver.Save(library, LibraryPath), LibraryPath);
@@ -121,7 +122,7 @@ public partial class TerrainBuilder : Node
         return ResourceLoader.Load<Material>(path);
     }
 
-    private static void WriteTestMap()
+    private async Task WriteTestMap()
     {
         EnsureDir(TestMapPath.GetBaseDir());
         var library = ResourceLoader.Load<MeshLibrary>(LibraryPath)
@@ -152,6 +153,10 @@ public partial class TerrainBuilder : Node
             DirectionalShadowMaxDistance = 80f,
         });
 
+        // The navmesh is baked from the region's children, so the terrain goes under it.
+        var navigation = new NavigationRegion3D { Name = "Navigation", NavigationMesh = CreateNavigationMesh() };
+        Add(root, navigation);
+
         var grid = new GridMap
         {
             Name = "Terrain",
@@ -159,7 +164,7 @@ public partial class TerrainBuilder : Node
             CellSize = new Vector3(TerrainTileGeometry.CellSize, TerrainTileGeometry.CellHeight, TerrainTileGeometry.CellSize),
             CellCenterY = false,
         };
-        Add(root, grid);
+        Add(navigation, grid, root);
 
         var cells = TestMapLayout.Cells();
         foreach (var cell in cells)
@@ -175,6 +180,8 @@ public partial class TerrainBuilder : Node
         Add(root, camera);
         camera.LookAtFromPosition(centre + new Vector3(0f, 30f, 30f), centre, Vector3.Up);
 
+        await BakeNavigation(root, navigation);
+
         var scene = new PackedScene();
         Check(scene.Pack(root), TestMapPath);
         Check(ResourceSaver.Save(scene, TestMapPath), TestMapPath);
@@ -182,10 +189,52 @@ public partial class TerrainBuilder : Node
         GD.Print($"wrote  {TestMapPath} ({cells.Count} cells)");
     }
 
-    private static void Add(Node root, Node child)
+    /// <summary>
+    /// Navmesh settings for terrain maps. docs/navigation.md lists the same values for baking in the editor.
+    /// </summary>
+    public static NavigationMesh CreateNavigationMesh() => new()
     {
-        root.AddChild(child);
-        child.Owner = root;
+        // Bake from the GridMap's collision shapes, which leave out the water surface.
+        GeometryParsedGeometryType = NavigationMesh.ParsedGeometryType.StaticColliders,
+        GeometryCollisionMask = 1,
+        // Must match the navigation map (Project Settings > Navigation > 3D), which defaults to 0.25.
+        CellSize = 0.25f,
+        CellHeight = 0.25f,
+        // The player capsule: 0.35 m radius, 1.7 m tall.
+        AgentRadius = 0.35f,
+        AgentHeight = 1.7f,
+        // Steps up to 0.25 m; 1 m cliffs and the 0.5 m deep pond bed are not walkable.
+        AgentMaxClimb = 0.25f,
+        // The grass slope rises 1 m over 2 m (about 27°).
+        AgentMaxSlope = 45f,
+        // Drop the open sides of ramps where they are higher than a step, so paths join a ramp
+        // near its low edge instead of popping up onto its side.
+        FilterLedgeSpans = true,
+    };
+
+    // Baking parses the GridMap's physics bodies, which only exist once the map is in the scene
+    // tree and the GridMap has had a frame to build them. So attach the map to the builder briefly.
+    private async Task BakeNavigation(Node3D root, NavigationRegion3D navigation)
+    {
+        AddChild(root);
+        await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+        await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+        navigation.BakeNavigationMesh(false);
+        RemoveChild(root);
+
+        var mesh = navigation.NavigationMesh;
+        if (mesh.GetPolygonCount() == 0)
+        {
+            throw new InvalidOperationException("Navmesh bake produced no polygons.");
+        }
+
+        GD.Print($"baked  navmesh ({mesh.GetPolygonCount()} polygons, {mesh.GetVertices().Length} vertices)");
+    }
+
+    private static void Add(Node parent, Node child, Node? owner = null)
+    {
+        parent.AddChild(child);
+        child.Owner = owner ?? parent;
     }
 
     private static void EnsureDir(string resDir) =>

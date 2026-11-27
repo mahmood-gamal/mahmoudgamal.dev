@@ -19,6 +19,7 @@ The IDs are stored in painted maps. Never renumber them; only add new tiles at t
 (`scripts/core/Terrain/TerrainTile.cs`).
 
 Every tile has a collision shape, so mouse picking and navmesh baking can use it.
+The water surface is the exception: clicks and the navmesh bake pass through it to the pond bed (see [navigation.md](navigation.md)).
 
 ### Grid settings
 
@@ -49,7 +50,7 @@ tools/build_terrain.sh          # set GODOT=/path/to/godot if it isn't on PATH
 
 The script:
 - writes any **missing** PNGs and materials, and keeps existing ones, so you can replace the art by hand;
-- **always** rebuilds `terrain_tiles.tres` and `scenes/maps/TestMap.tscn`.
+- **always** rebuilds `terrain_tiles.tres` and `scenes/maps/TestMap.tscn`, and bakes the test map's navmesh.
 
 Don't hand-paint `TestMap.tscn`, because the script overwrites it. To change the test map, edit
 `scripts/core/Terrain/TestMapLayout.cs` (the symbols are documented in `TerrainMapLayout.cs`) and run the script again.
@@ -88,6 +89,7 @@ Paint new maps in their own scenes, as shown below.
     3. Press **Q** to return to floor 0 when you are done.
 12. Look at the result: press **F** in the viewport to frame the selection. Use the **Perspective** menu (top left of the viewport) for preset angles.
 13. Save with **Ctrl+S**.
+14. Bake a navmesh so the player can walk on it: follow [Baking a navmesh in the editor](navigation.md#baking-a-navmesh-in-the-editor).
 
 To play a map, open `scenes/Main.tscn`, select the `TestMap` node, and in the Inspector click the scene icon to replace it with your map. `Main.tscn` holds the game camera (see [camera.md](camera.md)), so it works with any map. Or press **F6** with your map open to run just that scene. Maps have no game camera of their own; to preview one this way, copy `PreviewCamera` from `TestMap.tscn`, as in step 3.
 

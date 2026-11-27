@@ -130,7 +130,7 @@ _surfaces = [{
 }]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rhqxi"]
-data = PackedVector3Array(-1, -0.5, 1, 1, -0.5, -1, 1, -0.5, 1, -1, -0.5, 1, -1, -0.5, -1, 1, -0.5, -1, -1, -0.14999999, 1, 1, -0.14999999, -1, 1, -0.14999999, 1, -1, -0.14999999, 1, -1, -0.14999999, -1, 1, -0.14999999, -1)
+data = PackedVector3Array(-1, -0.5, 1, 1, -0.5, -1, 1, -0.5, 1, -1, -0.5, 1, -1, -0.5, -1, 1, -0.5, -1)
 
 [resource]
 item/0/name = "Grass (flat)"
