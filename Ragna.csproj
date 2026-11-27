@@ -12,5 +12,11 @@
     <!-- Test projects live under /tests and are built separately. -->
     <Compile Remove="tests/**" />
     <None Remove="tests/**" />
+    <!-- Core logic is its own Godot-free assembly; reference it instead of compiling it here. -->
+    <Compile Remove="scripts/core/**" />
+    <None Remove="scripts/core/**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="scripts/core/Ragna.Core.csproj" />
   </ItemGroup>
 </Project>
