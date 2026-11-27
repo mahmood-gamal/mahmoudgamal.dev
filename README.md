@@ -39,6 +39,10 @@ dotnet test
 | `scripts/dialogue/` | Dialogue runner and scene UI |
 | `data/` | Data files (JSON dialogue, item and monster tables) |
 | `assets/` | Art, audio, fonts |
+| `scenes/maps/` | Playable maps (`TestMap.tscn` is generated, see [docs/terrain.md](docs/terrain.md)) |
+| `assets/terrain/` | Terrain MeshLibrary, materials and textures |
+| `tools/` | Asset build scripts (`tools/build_terrain.sh`) |
+| `docs/` | Guides, for example [terrain and GridMap painting](docs/terrain.md) |
 | `tests/` | xUnit test projects (excluded from the game assembly, ignored by Godot) |
 
 ## C# conventions
