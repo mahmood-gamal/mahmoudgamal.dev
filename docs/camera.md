@@ -19,7 +19,7 @@ Rebind them in **Project > Project Settings > Input Map**. Turning and zooming e
 
 ## Setup
 
-`scenes/Main.tscn` has a `GameCamera` node (`scripts/gameplay/Camera/GameCamera.cs`). Its **Target** is the node it follows. For now that is the `Player` placeholder capsule; the click-to-move and sprite tickets replace it with the real player.
+`scenes/Main.tscn` has a `GameCamera` node (`scripts/gameplay/Camera/GameCamera.cs`). Its **Target** is the node it follows: the `Player` (`scenes/actors/Player.tscn`), which walks with click-to-move (see [navigation.md](navigation.md)). The player is still a placeholder capsule until the sprite ticket.
 
 Tune it in the Inspector:
 

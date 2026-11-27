@@ -145,4 +145,29 @@ public sealed class TerrainTileGeometryTests
     }
 
     private static Vector3 Round(Vector3 v) => new(MathF.Round(v.X), MathF.Round(v.Y), MathF.Round(v.Z));
+
+    [Fact]
+    public void Water_surface_has_no_collision_but_the_bed_does()
+    {
+        var collision = TerrainTileGeometry.Collision(TerrainTile.Water);
+
+        Assert.NotEmpty(collision);
+        Assert.All(collision, t => Assert.Equal(TerrainSurface.Sand, t.Surface));
+    }
+
+    [Theory]
+    [InlineData(TerrainTile.GrassFlat)]
+    [InlineData(TerrainTile.DirtFlat)]
+    [InlineData(TerrainTile.GrassSlope)]
+    [InlineData(TerrainTile.Cliff)]
+    public void Land_tiles_collide_everywhere(TerrainTile tile) =>
+        Assert.Equal(TerrainTileGeometry.Build(tile).Count, TerrainTileGeometry.Collision(tile).Count);
+
+    [Fact]
+    public void Pond_bed_is_deeper_than_a_character_can_step()
+    {
+        // Matches agent_max_climb on the navmesh (docs/navigation.md).
+        const float maxClimb = 0.25f;
+        Assert.True(-TerrainTileGeometry.WaterBedY > maxClimb);
+    }
 }

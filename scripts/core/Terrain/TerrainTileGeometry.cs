@@ -37,6 +37,14 @@ public static class TerrainTileGeometry
         _ => throw new ArgumentOutOfRangeException(nameof(tile), tile, "Unknown terrain tile."),
     };
 
+    /// <summary>
+    /// The triangles that get a collision shape: everything except the water surface. Mouse picks
+    /// and navmesh baking go through the water to the pond bed. The bed sits deeper below ground than
+    /// a character can step, so ponds bake as separate islands nobody can walk to.
+    /// </summary>
+    public static IReadOnlyList<TerrainTriangle> Collision(TerrainTile tile) =>
+        Build(tile).Where(t => t.Surface != TerrainSurface.Water).ToList();
+
     /// <summary>Human-readable name used for the MeshLibrary item.</summary>
     public static string DisplayName(TerrainTile tile) => tile switch
     {

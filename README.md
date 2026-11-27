@@ -42,17 +42,19 @@ dotnet test
 | `scenes/maps/` | Playable maps (`TestMap.tscn` is generated, see [docs/terrain.md](docs/terrain.md)) |
 | `assets/terrain/` | Terrain MeshLibrary, materials and textures |
 | `tools/` | Asset build scripts (`tools/build_terrain.sh`) |
-| `docs/` | Guides, for example [terrain and GridMap painting](docs/terrain.md) and the [game camera](docs/camera.md) |
+| `scenes/actors/` | Characters (`Player.tscn`) |
+| `docs/` | Guides, for example [terrain and GridMap painting](docs/terrain.md), the [game camera](docs/camera.md) and [click-to-move and navmesh baking](docs/navigation.md) |
 | `tests/` | xUnit test projects (excluded from the game assembly, ignored by Godot) |
 
 ## Controls
 
 | Input | Action |
 | --- | --- |
+| Left mouse button | Walk to the clicked ground; hold it to keep walking towards the cursor |
 | **Q** / **E** | Turn the camera 45° around the player |
 | Mouse wheel | Zoom in and out |
 
-See [docs/camera.md](docs/camera.md).
+See [docs/navigation.md](docs/navigation.md) and [docs/camera.md](docs/camera.md).
 
 ## C# conventions
 
