@@ -41,9 +41,10 @@ dotnet test
 | `assets/` | Art, audio, fonts |
 | `scenes/maps/` | Playable maps (`TestMap.tscn` is generated, see [docs/terrain.md](docs/terrain.md)) |
 | `assets/terrain/` | Terrain MeshLibrary, materials and textures |
-| `tools/` | Asset build scripts (`tools/build_terrain.sh`) |
-| `scenes/actors/` | Characters (`Player.tscn`) |
-| `docs/` | Guides, for example [terrain and GridMap painting](docs/terrain.md), the [game camera](docs/camera.md) and [click-to-move and navmesh baking](docs/navigation.md) |
+| `tools/` | Asset build scripts (`tools/build_terrain.sh`, `tools/characters/make_placeholder_sprites.py`) |
+| `scenes/actors/` | Characters (`Player.tscn`) and the character sprite with its blob shadow (`CharacterVisual.tscn`) |
+| `assets/characters/` | Character sprite sheets and `SpriteFrames` |
+| `docs/` | Guides, for example [terrain and GridMap painting](docs/terrain.md), the [game camera](docs/camera.md), [click-to-move and navmesh baking](docs/navigation.md) and [character sprites](docs/characters.md) |
 | `tests/` | xUnit test projects (excluded from the game assembly, ignored by Godot) |
 
 ## Controls
