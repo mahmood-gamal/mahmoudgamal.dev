@@ -167,7 +167,7 @@ public partial class TerrainBuilder : Node
             grid.SetCellItem(new Vector3I(cell.X, cell.Y, cell.Z), (int)cell.Tile, TerrainMeshBuilder.Orientation(grid, cell.YawDegrees));
         }
 
-        // Placeholder view of the whole map at a 45° pitch. GAM-4 replaces this with the game camera.
+        // Editor/F6 preview of the whole map at a 45° pitch. In game, GameCamera in Main.tscn takes over.
         var width = TestMapLayout.Layers[0][0].Length * TerrainTileGeometry.CellSize;
         var depth = TestMapLayout.Layers[0].Count * TerrainTileGeometry.CellSize;
         var centre = new Vector3(width / 2f, 0f, depth / 2f);

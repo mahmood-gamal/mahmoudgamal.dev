@@ -89,7 +89,7 @@ Paint new maps in their own scenes, as shown below.
 12. Look at the result: press **F** in the viewport to frame the selection. Use the **Perspective** menu (top left of the viewport) for preset angles.
 13. Save with **Ctrl+S**.
 
-To play a map, open `scenes/Main.tscn`, select the `TestMap` node, and in the Inspector click the scene icon to replace it with your map. Or press **F6** with your map open to run just that scene. Your new map has no camera yet; GAM-4 adds the game camera. To preview it without the game camera, copy `PreviewCamera` from `TestMap.tscn`, as in step 3.
+To play a map, open `scenes/Main.tscn`, select the `TestMap` node, and in the Inspector click the scene icon to replace it with your map. `Main.tscn` holds the game camera (see [camera.md](camera.md)), so it works with any map. Or press **F6** with your map open to run just that scene. Maps have no game camera of their own; to preview one this way, copy `PreviewCamera` from `TestMap.tscn`, as in step 3.
 
 ## Code
 

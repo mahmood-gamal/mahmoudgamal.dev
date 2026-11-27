@@ -42,8 +42,17 @@ dotnet test
 | `scenes/maps/` | Playable maps (`TestMap.tscn` is generated, see [docs/terrain.md](docs/terrain.md)) |
 | `assets/terrain/` | Terrain MeshLibrary, materials and textures |
 | `tools/` | Asset build scripts (`tools/build_terrain.sh`) |
-| `docs/` | Guides, for example [terrain and GridMap painting](docs/terrain.md) |
+| `docs/` | Guides, for example [terrain and GridMap painting](docs/terrain.md) and the [game camera](docs/camera.md) |
 | `tests/` | xUnit test projects (excluded from the game assembly, ignored by Godot) |
+
+## Controls
+
+| Input | Action |
+| --- | --- |
+| **Q** / **E** | Turn the camera 45° around the player |
+| Mouse wheel | Zoom in and out |
+
+See [docs/camera.md](docs/camera.md).
 
 ## C# conventions
 
